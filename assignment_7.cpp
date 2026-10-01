@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 #define INF 9999
-// Structure for Kruskal's Algorithm
+
 struct Edge
 {
  int source;
  int destination;
  int weight;
 };
-// Find parent for Kruskal
+
 int findParent(int parent[], int vertex)
 {
  while (parent[vertex] != vertex)
@@ -17,24 +17,22 @@ int findParent(int parent[], int vertex)
  }
  return vertex;
 }
-// Union for Kruskal
+
 void unionSet(int parent[], int a, int b)
 {
  int parentA = findParent(parent, a);
  int parentB = findParent(parent, b);
  parent[parentB] = parentA;
 }
-// ---------------- PRIM'S ALGORITHM ----------------
+
 void prim(int graph[5][5], int n)
 {
  int selected[5] = {0};
  int edges = 0;
  int totalCost = 0;
- // Start from vertex 0
 selected[0] = 1;
 
 cout << "\nMinimum Spanning Tree using Prim's Algorithm\n";
-cout << "---------------------------------------------\n";
 
 while (edges < n - 1)
 {
@@ -42,7 +40,7 @@ int min = INF;
 int x = 0;
 int y = 0;
 
-// Find minimum edge
+
 for (int i = 0; i < n; i++)
 {
 if (selected[i] == 1)
@@ -73,15 +71,11 @@ selected[y] = 1;
 edges++;
 }
 
-cout << "---------------------------------------------\n";
 cout << "Total Cost = " << totalCost << endl;
 }
 
-// ---------------- KRUSKAL'S ALGORITHM ----------------
-
 void kruskal(Edge edges[], int n, int m)
 {
-// Sort edges according to weight
 for (int i = 0; i < m - 1; i++)
 {
 for (int j = 0; j < m - i - 1; j++)
@@ -100,7 +94,7 @@ edges[j + 1] = temp;
 
 int parent[5];
 
-// Initially every vertex is its own parent
+
 for (int i = 0; i < n; i++)
 {
 parent[i] = i;
@@ -112,7 +106,6 @@ int totalCost = 0;
 cout << "\nMinimum Spanning Tree using Kruskal's Algorithm\n";
 cout << "-----------------------------------------------\n";
 
-// Select edges
 for (int i = 0; i < m; i++)
 {
 
@@ -122,7 +115,6 @@ int destination = edges[i].destination;
 int parentSource = findParent(parent, source);
 int parentDestination = findParent(parent, destination);
 
-// Check whether edge creates cycle
 if (parentSource != parentDestination)
 {
 cout << "Edge: " << source << " - " << destination;
@@ -134,7 +126,6 @@ unionSet(parent, source, destination);
 
 selectedEdges++;
 
-// MST contains n-1 edges
 if (selectedEdges == n - 1)
 {
 break;
@@ -142,26 +133,16 @@ break;
 }
 }
 
-cout << "-----------------------------------------------\n";
 cout << "Total Cost = " << totalCost << endl;
 
 }
 
-// ---------------- MAIN FUNCTION ----------------
+
 
 int main()
 {
 int n = 5;
 
-/*
-Campus Vertices:
-
-0 = Main Gate
-1 = Admin Block
-2 = Library
-3 = Canteen
-4 = Computer Lab
-*/
 
 int graph[5][5] =
 {
@@ -171,8 +152,6 @@ int graph[5][5] =
 {0, 4, 2, 0, 3},
 {0, 0, 5, 3, 0}
 };
-
-// Edges for Kruskal
 
 Edge edges[7] =
 {
@@ -184,12 +163,8 @@ Edge edges[7] =
 {2, 4, 5},
 {3, 4, 3}
 };
-
 int m = 7;
-
 int choice;
-
-cout << "====================================\n";
 cout << " COLLEGE CAMPUS MST PROGRAM\n";
 cout << "====================================\n";
 
